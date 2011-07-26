@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
+
+<!--See http://html5boilerplate.com/ -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
+
+<link rel="stylesheet" type="text/css" href="index.css" /> 
+<title>Slave Slideshow</title> 
+<script type="text/javascript" src="helpers.js"></script>
+<script type="text/javascript" src="slaveshow_no-easing.js"></script>
+<script type="text/javascript">
+
+
+$(function(){
+	
+	var slideshow = new Slaveshow("#container",{
+		entrance: {speed: 500},
+		exit: {speed: 500, animation: "toTop"},
+		duration: 3000,
+		transition: "fade",
+		nav: $("#slideNav li"),
+		left: $("#left"),
+		right: $("#right")
+	});
+
+	slideshow.addSlave({
+		container: $("#slave"), 
+		entrance: {animation: "fromLeft"},
+		exit: {animation: "toRight"},
+		delay: 200
+	});
+			
+	slideshow.addSlave({
+		container: $("#slave2"), 
+		entrance: {animation: "fromTop"},
+		exit: {animation: "toBottom"},
+		delay: 400
+	});
+
+	slideshow.animate();
+	
+});
+</script> 
+ 
+</head> 
+<body> 
+ 
+<div id="wrapper"> 
+    <div id="container" class="slideshow">   	
+		<div class="box box1"> 
+		<p>Slide 1</p>
+		</div>
+		<div class="box box2" id="box2"> 
+		<p>Slide 2</p>
+		</div> 
+		<div class="box box3" id="box3"> 
+		<p>Slide 3</p>
+		</div> 
+		<div class="box box4" id="box4"> 
+		<p>Slide 4</p>
+		</div> 
+		<div class="box box5" id="box5"> 
+		<p>Slide 5</p>
+		</div>
+    </div><!--End Content-->
+	<div id="slave" class="slideshow">
+		<div class="box box1">
+		<p>Slave 1 Slide 1</p>
+		</div>
+		<div class="box box2">
+		<p>Slave 1 Slide 2</p>
+		</div>
+		<div class="box box3">
+		<p>Slave 1 Slide 3</p>
+		</div>
+		<div class="box box4">
+		<p>Slave 1 Slide 4</p>
+		</div>
+		<div class="box box5">
+		<p>Slave 1 Slide 5</p>
+		</div>		
+	</div>
+	<div id="slave2" class="slideshow">
+		<div class="box box1">
+		<p>Slave 2 Slide 1</p>
+		</div>
+		<div class="box box2">
+		<p>Slave 2 Slide 2</p>
+		</div>
+		<div class="box box3">
+		<p>Slave 2 Slide 3</p>
+		</div>
+		<div class="box box4">
+		<p>Slave 2 Slide 4</p>
+		</div>
+		<div class="box box5">
+		<p>Slave 2 Slide 5</p>
+		</div>		
+	</div>	
+	<ul id="slideNav">
+	<li class="slideNavActive"></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	</ul>
+	
+	<div id="left">
+	LEFT</div>
+	
+	<div id="right">
+	RIGHT</div>
+</div><!--End Wrapper--> 
+	
+</body> 
+</html> 
