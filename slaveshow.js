@@ -7,12 +7,11 @@
 //         Features include next, previous, and navigation.
 //Last Updated: November 14, 2010
 //--------------------------------------------------------------------
-(function(jQuery) {
 
-jQuery.fn.slaveshow = function(options)
-{
+function Slaveshow(id, options){
 	/**
 	---------------------------------------- User defined variables ---------------------------------------------
+			id: jQuery id of the slideshow container
 	    slides: jQuery object that represents the elements that will serve as slides.
 	  duration: How long each slide will remain visible assuming no interruption.
 	transition: The time between the previous slide's exit and the next slide's entrance.
@@ -27,14 +26,14 @@ jQuery.fn.slaveshow = function(options)
 	
 	//Initialize default values
 	var defaults = {
-	 container: jQuery(this),
- 	    slides: jQuery(this).children(),		
+	 container: jQuery(id),
+ 	    slides: jQuery(id).children(),		
 	  duration: 3000,   			
 	transition: 500, 
 	    slaves: [],
 	     delay: 0,          			
 	    cycles: 10          		    
-	};	defaultSettings = jQuery.extend(defaults, jQuery.fn.slaveshow.defaults, options);  
+	},	defaultSettings = jQuery.extend(defaults, options);  
 	
 	/**
 	---------------------------------Global variable object---------------------------------
@@ -373,19 +372,12 @@ jQuery.fn.slaveshow = function(options)
 	var slideshowArray = {main: new slideshow(defaultSettings)};		
 		
 	//---------------------------------------------------------------------------------//
-	//----------------------------Begin Slave Array Parsing----------------------------//
+	//----------------------------  Add Slave Slideshows   ----------------------------//
 	//---------------------------------------------------------------------------------//		
 	
-	//If a slave slideshow was specified
-	if(defaultSettings.slaves.length)
-	{					
-		//For each slave declared
-		for(i=0; i<defaultSettings.slaves.length; i++)
-		{	
-			//Create a new slideshow for this slave
-			slideshowArray["slave" + i] = new slideshow(defaultSettings.slaves[i]);
-		}	
-	}
+	this.addSlave = function(opts){
+			slideshowArray["slave" + global.numSlideShows] = new slideshow(opts);
+	};
 	
 	//---------------------------------------------------------------------------------//
 	//-----------------------------Begin Slide Navigations-----------------------------//
@@ -460,12 +452,18 @@ jQuery.fn.slaveshow = function(options)
 		});
 	}
 	
-	//For each slideshow in the slideshowArray, run the slideshow Animation
-	//And count how many slideshows there are
-	for (var i in slideshowArray)
-	{
-		jQuery(slideshowArray[i].slides).fakeFloat();
-		slideshowArray[i].animate();
-	}			
+	//---------------------------------------------------------------------------------//
+	//----------------------------    Trigger Animation     ---------------------------//
+	//---------------------------------------------------------------------------------//		
+	
+	this.animate = function(){
+		//For each slideshow in the slideshowArray, run the slideshow Animation
+		//And count how many slideshows there are
+		for (var i in slideshowArray)
+		{
+			jQuery(slideshowArray[i].slides).fakeFloat();
+			slideshowArray[i].animate();
+		}			
+	}
 };
-})(jQuery); //End document
+

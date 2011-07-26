@@ -16,33 +16,32 @@
 
 
 $(function(){
-	var slave1 = 
-	{
+	
+	var slideshow = new Slaveshow("#container",{
+		entrance: {speed: 500},
+		exit: {speed: 500, animation: "toTop", easing: "easeOutQuad"},
+		duration: 3000,
+		transition: "fade",
+		nav: $("#slideNav li"),
+		left: $("#left"),
+		right: $("#right")
+	});
+
+	slideshow.addSlave({
 		container: $("#slave"), 
 		entrance: {animation: "fromLeft", easing: "easeOutBounce"},
 		exit: {animation: "toLeft", easing: "easeOutBounce"},
 		delay: 200
-	};
+	});
 			
-	var slave2 = 
-	{
+	slideshow.addSlave({
 		container: $("#slave2"), 
 		entrance: {animation: "fromTop", easing: "easeOutQuad"},
 		exit: {animation: "toTop", easing: "easeOutQuad"},
 		delay: 400
-	};
-	
-	$("#container").slaveshow({
-	slaves: [slave1, slave2],
-	entrance: {speed: 500},
-	exit: {speed: 500, animation: "toTop", easing: "easeOutQuad"},
-	duration: 3000,
-	transition: "fade",
-	nav: $("#slideNav li"),
-	left: $("#left"),
-	right: $("#right")
 	});
 
+	slideshow.animate();
 	
 });
 </script> 
